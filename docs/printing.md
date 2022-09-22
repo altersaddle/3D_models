@@ -1,10 +1,10 @@
 ## Software
 
-When 3D printing, we are using **Slic3r** as the slicing software, exporting as g-code and then copying to an SD card. The printer can print directly from g-code files on tan SD card.
+When 3D printing, we are using **Slic3r** as the slicing software, exporting as g-code and then copying to an SD card. The printer can print directly from g-code files on an SD card.
 
 When directly troubleshooting we are connecting the printer via USB and using Pronterface to send g-code commands over the serial console.
 
-The following custom buttons were added to Pronterface:
+Buttons that issue the following G-code were added to Pronterface:
 
 * Center Test: _Home the printer, then go to 0,0,1 quickly_
   * `g28`
@@ -19,7 +19,7 @@ The following custom buttons were added to Pronterface:
   * `g28`
   * `g0 z1 y90 x0 f8000`
 
-These buttons simplify the configuration of the Z-stops and Delta Radius (see below). After moving the head to one of the locations, we use the 0.1mm -Z button in Pronterface to move the print head 10 steps until it pinches a piece of paper.
+These buttons simplify the configuration of the Z-stops and Delta Radius (see below). After moving the head to one of the locations, we use the 0.1mm -Z button in Pronterface to move the print head closer to the bed until it pinches a piece of paper.
 
 ## Hardware
 
@@ -55,8 +55,12 @@ Connect Pronterface to the printer and perform the following:
 
 #### Delta Radius adjustment
 
-After the Z-Stop Adjustment is complete, the Z-distance at 0,0 (bed center) is confirmed. If it's too far away, the Delta Radius must be increased. Too close and the Delta Radius must be decreased. This is a trial-and-error process and will take a while.
+After the Z-Stop Adjustment is complete, the Z-distance at 0,0 (bed center) is confirmed. If it's too far away, the Delta Radius must be increased. Too close and the Delta Radius must be decreased. This is a repetitive process and can take a while.
 
 `M503` will print the current radius value associated with the **M665** parameter.
 
 The `M665` command will set the radius value.
+
+Settings should be saved to EEPROM after verifying.
+
+Issue the `G28` command (auto-home) between tests. 
